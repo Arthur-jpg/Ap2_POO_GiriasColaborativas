@@ -1,0 +1,133 @@
+@startuml Sistema de Gírias Colaborativas
+
+' Interfaces
+interface Votavel {
+  +getVotos(): int
+  +adicionarVoto(voto: Voto): void
+  +removerVoto(voto: Voto): void
+}
+
+interface Editavel {
+  +editar(texto: String, editor: Usuario): boolean
+  +getHistoricoEdicoes(): List<Edicao>
+}
+
+' Classes base
+abstract class Conteudo {
+  -id: Long
+  -dataCriacao: LocalDateTime
+  -autor: Usuario
+  #ativo: boolean
+  +getId(): Long
+  +getDataCriacao(): LocalDateTime
+  +getAutor(): Usuario
+  +isAtivo(): boolean
+  +desativar(): void
+  +reativar(): void
+}
+
+class Usuario {
+  -id: Long
+  -nome: String
+  -email: String
+  -senha: String
+  -dataCadastro: LocalDateTime
+  -reputacao: int
+  -admin: boolean
+  +addGiria(giria: Giria): void
+  +addExplicacao(explicacao: Explicacao): void
+  +votar(votavel: Votavel, tipoVoto: TipoVoto): Voto
+  +calcularReputacao(): int
+  +isElegivel(nivelMinimo: int): boolean
+}
+
+enum TipoVoto {
+  POSITIVO(1)
+  NEGATIVO(-1)
+}
+
+class Voto {
+  -id: Long
+  -tipo: TipoVoto
+  -data: LocalDateTime
+  -usuario: Usuario
+  -votavel: Votavel
+}
+
+class Categoria {
+  -id: Long
+  -nome: String
+  -descricao: String
+}
+
+class Regiao {
+  -id: Long
+  -nome: String
+  -estado: String
+  -descricao: String
+}
+
+' Classes principais do sistema
+class Giria extends Conteudo implements Votavel, Editavel {
+  -termo: String
+  -explicacoes: List<Explicacao>
+  -categorias: List<Categoria>
+  -regioes: List<Regiao>
+  -votos: List<Voto>
+  -historico: List<Edicao>
+  +adicionarExplicacao(explicacao: Explicacao): void
+  +getExplicacaoMaisVotada(): Explicacao
+  +getExplicacoes(): List<Explicacao>
+  +adicionarCategoria(categoria: Categoria): void
+  +adicionarRegiao(regiao: Regiao): void
+  +getRegioes(): List<Regiao>
+  +editar(novoTermo: String, editor: Usuario): boolean
+  +getHistoricoEdicoes(): List<Edicao>
+  +getVotos(): int
+  +adicionarVoto(voto: Voto): void
+  +removerVoto(voto: Voto): void
+}
+
+class Explicacao extends Conteudo implements Votavel, Editavel {
+  -texto: String
+  -exemplos: List<String>
+  -giria: Giria
+  -votos: List<Voto>
+  -historico: List<Edicao>
+  +adicionarExemplo(exemplo: String): void
+  +getExemplos(): List<String>
+  +editar(novoTexto: String, editor: Usuario): boolean
+  +getHistoricoEdicoes(): List<Edicao>
+  +getVotos(): int
+  +adicionarVoto(voto: Voto): void
+  +removerVoto(voto: Voto): void
+}
+
+class Edicao {
+  -id: Long
+  -dataEdicao: LocalDateTime
+  -conteudoAnterior: String
+  -conteudoNovo: String
+  -editor: Usuario
+  -entidade: Editavel
+}
+
+' Relacionamentos
+Usuario "1" -- "*" Giria : cria >
+Usuario "1" -- "*" Explicacao : cria >
+Usuario "1" -- "*" Voto : realiza >
+
+Giria "1" *-- "*" Explicacao : contém >
+Giria "*" -- "*" Categoria : classificada >
+Giria "*" -- "*" Regiao : popular em >
+Giria "1" -- "*" Edicao : possui >
+Explicacao "1" -- "*" Edicao : possui >
+
+Voto "*" -- "1" Votavel : aplica-se a >
+
+Explicacao --o Votavel
+Giria --o Votavel
+Explicacao --o Editavel
+Giria --o Editavel
+
+@enduml
