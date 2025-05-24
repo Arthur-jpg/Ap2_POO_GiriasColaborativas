@@ -14,11 +14,11 @@ interface Editavel {
 
 ' Classes base
 abstract class Conteudo {
-  -id: Long
+  -id: String
   -dataCriacao: LocalDateTime
   -autor: Usuario
   #ativo: boolean
-  +getId(): Long
+  +getId(): String
   +getDataCriacao(): LocalDateTime
   +getAutor(): Usuario
   +isAtivo(): boolean
@@ -27,7 +27,7 @@ abstract class Conteudo {
 }
 
 class Usuario {
-  -id: Long
+  -id: String
   -nome: String
   -email: String
   -senha: String
@@ -47,7 +47,7 @@ enum TipoVoto {
 }
 
 class Voto {
-  -id: Long
+  -id: String
   -tipo: TipoVoto
   -data: LocalDateTime
   -usuario: Usuario
@@ -55,13 +55,13 @@ class Voto {
 }
 
 class Categoria {
-  -id: Long
+  -id: String
   -nome: String
   -descricao: String
 }
 
 class Regiao {
-  -id: Long
+  -id: String
   -nome: String
   -estado: String
   -descricao: String
@@ -103,8 +103,9 @@ class Explicacao extends Conteudo implements Votavel, Editavel {
   +removerVoto(voto: Voto): void
 }
 
+
 class Edicao {
-  -id: Long
+  -id: String
   -dataEdicao: LocalDateTime
   -conteudoAnterior: String
   -conteudoNovo: String
