@@ -6,9 +6,7 @@ public class Voto {
     private String id;
     private boolean tipoDeVoto;
     private LocalDateTime dataPostagem;
-    /*Um voto pertence a um único usuário */
     private Usuario usuario;
-    /* Um voto pertence a um único conteúdo votável */
     private Votavel votavel;
 
     public Voto(String id, boolean tipoDeVoto, Usuario usuario, Votavel votavel) {
@@ -16,8 +14,31 @@ public class Voto {
         this.tipoDeVoto = tipoDeVoto;
         this.usuario = usuario;
         this.votavel = votavel;
-        /*A data de postagem é definida automaticamente como a data e hora atuais */
         this.dataPostagem = LocalDateTime.now();
     }
-
+    
+    public String getId() {
+        return id;
+    }
+    
+    public boolean getTipoDeVoto() {
+        return tipoDeVoto;
+    }
+    
+    public LocalDateTime getDataPostagem() {
+        return dataPostagem;
+    }
+    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    
+    public Votavel getVotavel() {
+        return votavel;
+    }
+    
+    // Retorna o valor do voto (+1 ou -1)
+    public int getValor() {
+        return tipoDeVoto ? 1 : -1;
+    }
 }

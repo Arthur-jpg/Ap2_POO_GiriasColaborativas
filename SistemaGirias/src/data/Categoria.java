@@ -10,4 +10,21 @@ public class Categoria {
         this.nome = nome;
         this.descricao = descricao;
     }
+    
+    public String getId() {
+        return id;
+    }
+    
+    public String getNome() {
+        return nome;
+    }
+    
+    public String getDescricao() {
+        return descricao;
+    }
+    
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

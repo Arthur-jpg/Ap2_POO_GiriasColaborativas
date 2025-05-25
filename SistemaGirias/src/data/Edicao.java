@@ -16,8 +16,30 @@ public class Edicao {
         this.editor = editor;
         this.editavel = editavel;
         this.dataEdicao = LocalDateTime.now();
-        
-        // Obter o conteúdo anterior do objeto editável
         this.conteudoAnterior = editavel.getConteudo();
+    }
+    
+    public String getId() {
+        return id;
+    }
+    
+    public LocalDateTime getDataEdicao() {
+        return dataEdicao;
+    }
+    
+    public String getConteudoAnterior() {
+        return conteudoAnterior;
+    }
+    
+    public String getConteudoNovo() {
+        return conteudoNovo;
+    }
+    
+    public Usuario getEditor() {
+        return editor;
+    }
+    
+    public Editavel getEditavel() {
+        return editavel;
     }
 }

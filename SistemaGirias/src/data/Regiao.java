@@ -12,4 +12,25 @@ public class Regiao {
         this.estado = estado;
         this.descricao = descricao;
     }
+    
+    public String getId() {
+        return id;
+    }
+    
+    public String getNome() {
+        return nome;
+    }
+    
+    public String getEstado() {
+        return estado;
+    }
+    
+    public String getDescricao() {
+        return descricao;
+    }
+    
+    @Override
+    public String toString() {
+        return nome + " (" + estado + ")";
+    }
 }
