@@ -19,4 +19,5 @@ public class Voto {
         /*A data de postagem é definida automaticamente como a data e hora atuais */
         this.dataPostagem = LocalDateTime.now();
     }
+
 }

@@ -23,7 +23,33 @@ public class Usuario {
         this.dataCadastro = LocalDateTime.now();
     }
 
-    public void addGiria(Voto g) {
-        // Implementar lógica para adicionar gíria
+
+
+    public void addGiria(String id,String termo,Explicacao[] explicacoes,Categoria[] categorias,Regiao[] regioes) {
+        Voto[] votos = new Voto[0];
+        Edicao[] historicoEdicoes = new Edicao[0];
+        
+        Giria novaGiria = new Giria(
+            id,
+            this,
+            termo,
+            explicacoes,
+            categorias,
+            regioes,
+            votos,
+            historicoEdicoes
+        );
+
     }
+
+    public void addExplicacao(String id, String texto, String[] exemplos, Giria giria, Usuario autor) {
+        Explicacao novaExplicacao = new Explicacao(id, texto, exemplos, giria, autor);
+    }
+
+    public void votar(Votavel votavel, boolean tipoDeVoto) {
+        votavel.adicionarVoto(tipoDeVoto);
+    }
+
+
+
 }

@@ -8,8 +8,8 @@ public class Explicacao extends Conteudo implements Votavel, Editavel {
     private Voto[] votos;
     private Edicao[] historicoEdicoes;
 
-    public Explicacao(String id, String texto, String[] exemplos, Giria giria, Usuario autor, boolean ativo) {
-        super(id, autor, ativo);
+    public Explicacao(String id, String texto, String[] exemplos, Giria giria, Usuario autor) {
+        super(id, autor);
         this.texto = texto;
         this.exemplos = exemplos;
         this.giria = giria;

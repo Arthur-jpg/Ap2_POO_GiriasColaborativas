@@ -17,11 +17,9 @@ abstract class Conteudo {
   -id: String
   -dataCriacao: LocalDateTime
   -autor: Usuario
-  #ativo: boolean
   +getId(): String
   +getDataCriacao(): LocalDateTime
   +getAutor(): Usuario
-  +isAtivo(): boolean
   +desativar(): void
   +reativar(): void
 }
